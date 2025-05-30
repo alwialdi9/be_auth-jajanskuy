@@ -9,18 +9,18 @@ import (
 var validate = validator.New()
 
 var customMessages = map[string]map[string]string{
-	"username": {
+	"Username": {
 		"required": "username is required",
 		"min":      "username must be at least 3 characters",
 		"max":      "username must be less than 20 characters",
 	},
-	"email": {
+	"Email": {
 		"required": "email is required",
 		"email":    "email must be a valid email address",
 	},
-	"password": {
+	"Password": {
 		"required": "Password is required",
-		"min":      "Password must be at least 6 characters",
+		"min":      "Password must be at least 8 characters",
 	},
 }
 
