@@ -18,7 +18,7 @@ func SignUp(c *fiber.Ctx) error {
 
 	var req signUpReq
 	if err := c.BodyParser(&req); err != nil {
-		return utils.JsonErrorResponse(c, fiber.StatusOK, "Invalid request body", err)
+		return utils.JsonErrorResponse(c, fiber.StatusOK, "Invalid request body", err.Error())
 	}
 
 	validationReq := utils.ValidateStruct(req)
@@ -28,7 +28,7 @@ func SignUp(c *fiber.Ctx) error {
 
 	hashPassword, err := utils.HashPassword(req.Password)
 	if err != nil {
-		return utils.JsonErrorResponse(c, fiber.StatusOK, "Failed to hash password", err)
+		return utils.JsonErrorResponse(c, fiber.StatusOK, "Failed to hash password", err.Error())
 	}
 
 	user := models.User{
@@ -41,7 +41,7 @@ func SignUp(c *fiber.Ctx) error {
 
 	errorCreate := models.CreateUser(connection.DB, &user)
 	if errorCreate != nil {
-		return utils.JsonErrorResponse(c, fiber.StatusOK, "Failed to create user", errorCreate)
+		return utils.JsonErrorResponse(c, fiber.StatusOK, "Failed to create user", errorCreate.Error())
 	}
 
 	return utils.JsonResponse(c, fiber.StatusCreated, "User created successfully", fiber.Map{
