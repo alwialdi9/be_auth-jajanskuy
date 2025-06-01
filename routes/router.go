@@ -33,6 +33,10 @@ func Router() *fiber.App {
 	})
 
 	api.Post("/signup", handlers.SignUp)
+	api.Post("/login", handlers.Login)
+
+	apiAuth := api.Use(middlewares.AuthMiddleware)
+	apiAuth.Get("/profile", handlers.GetUserProfile)
 
 	return app
 }

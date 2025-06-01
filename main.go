@@ -13,9 +13,7 @@ import (
 
 func main() {
 	os.Setenv("TZ", "Asia/Jakarta")
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("No .env file found, using environment variables")
-	}
+	_ = godotenv.Load()
 
 	log.SetReportCaller(true)
 	log.SetFormatter(&utils.Formatter{})

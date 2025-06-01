@@ -53,3 +53,10 @@ func GetUserByEmail(db *gorm.DB, email string) (*User, error) {
 	}
 	return &user, nil
 }
+
+func UpdateToken(db *gorm.DB, userID int, token string) error {
+	if err := db.Model(&User{}).Where("id = ?", userID).Update("token", token).Error; err != nil {
+		return err
+	}
+	return nil
+}
