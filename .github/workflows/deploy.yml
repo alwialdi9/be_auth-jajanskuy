@@ -23,10 +23,13 @@ jobs:
             echo "❌ Error: EC2_HOST is empty or not set in GitHub Secrets."
             exit 1
           fi
+          echo "🔍 EC2_HOST: ${{ secrets.EC2_HOST }}"
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+          echo "📡 Scanning SSH key..."
+          ssh-keyscan -vvv -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
