@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  goapp:
+    build:
+      context: .
+    container_name: go-auth-app
+    ports:
+      - "80:3000"  # expose port 3000 (Go app) ke port 80 di EC2
+    env_file:
+      - .env
